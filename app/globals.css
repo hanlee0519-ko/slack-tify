@@ -1,0 +1,12 @@
+nav {
+  background-color: salmon;
+  border: 1px sold black;
+  height: 100px;
+  display: flex;
+  flex-direction: column;
+}
+
+nav a {
+  text-decoration: none;
+  color: white;
+}
