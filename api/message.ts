@@ -1,4 +1,4 @@
-import { supabase } from "./supabase";
+import createSupabaseBrowserClient from "./supabase";
 
 export type MessageListType = {
   id: number;
@@ -7,22 +7,16 @@ export type MessageListType = {
   message: string;
 };
 
-async function getMessageList(
-  channelName: string
-): Promise<MessageListType[] | null> {
-  const { data } = await supabase
-    .from("workspace")
-    .select("*")
-    .eq("channel", channelName);
+async function getMessage(): Promise<MessageListType[] | null> {
+  const supabase = createSupabaseBrowserClient();
+  const { data } = await supabase.from("workspace").select("*");
 
   return data;
 }
 
-async function createMessage(channelName: string, message: string) {
-  await supabase
-    .from("workspace")
-    .insert({ channel: channelName, message: message })
-    .select();
+async function createMessage(message: string) {
+  const supabase = createSupabaseBrowserClient();
+  await supabase.from("workspace").insert({ message: message }).select();
 }
 
-export const supabaseWrapper = { getMessageList, createMessage };
+export const supabaseWrapper = { getMessage, createMessage };
