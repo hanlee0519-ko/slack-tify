@@ -1,26 +1,22 @@
 "use client";
-import { supabaseWrapper } from "@/api/message";
-import { useRouter } from "next/navigation";
+
 import { type FormEvent, useState } from "react";
 
 type Props = {
-  channelName: string;
+  onCreate: (message: string) => {};
 };
 
-export default function MessageAddForm({ channelName }: Props) {
-  const router = useRouter();
-  const [message, setMessage] = useState<string | undefined>("");
+export default function MessageAddForm({ onCreate }: Props) {
+  const [input, setInput] = useState<string | undefined>("");
 
-  async function handleSubmit(event: FormEvent<HTMLFormElement>) {
+  function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
-    if (typeof message === "undefined" || message.trim().length === 0) {
-      setMessage("");
+    if (typeof input === "undefined" || input.trim().length === 0) {
+      setInput("");
       return;
     }
-
-    await supabaseWrapper.createMessage(channelName, message);
-    router.refresh();
-    setMessage("");
+    onCreate(input);
+    setInput("");
   }
 
   return (
@@ -28,10 +24,10 @@ export default function MessageAddForm({ channelName }: Props) {
       <p>
         <input
           type="text"
-          value={message || ""}
+          value={input || ""}
           autoFocus
           placeholder="Input Message"
-          onChange={(e) => setMessage(e.target.value)}
+          onChange={(e) => setInput(e.target.value)}
         />
         <button onClick={() => handleSubmit}>Add</button>
       </p>
