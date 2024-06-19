@@ -8,7 +8,7 @@ export default function useMessage() {
 
   useEffect(() => {
     getTodoList();
-  }, []);
+  }, [messageList]);
 
   async function getTodoList() {
     const result = await supabaseWrapper.getMessage();
@@ -17,7 +17,6 @@ export default function useMessage() {
 
   async function createTodoList(message: string) {
     await supabaseWrapper.createMessage(message);
-    await getTodoList();
   }
 
   return { messageList, createTodoList };
