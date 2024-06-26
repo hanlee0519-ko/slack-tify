@@ -11,10 +11,10 @@ export default function MessageAddForm({ onCreate }: Props) {
 
   function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
-    if (typeof input === "undefined" || input.trim().length === 0) {
-      setInput("");
-      return;
-    }
+
+    if (typeof input === "undefined") return;
+    if (input.trim().length === 0) return;
+
     onCreate(input);
     setInput("");
   }
@@ -25,9 +25,9 @@ export default function MessageAddForm({ onCreate }: Props) {
         <input
           type="text"
           value={input || ""}
-          autoFocus
           placeholder="Input Message"
           onChange={(e) => setInput(e.target.value)}
+          autoFocus
         />
         <button onClick={() => handleSubmit}>Add</button>
       </p>

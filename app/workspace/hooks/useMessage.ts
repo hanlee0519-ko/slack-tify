@@ -6,18 +6,20 @@ type WorkSpace = MessageListType[];
 export default function useMessage() {
   const [messageList, setMessageList] = useState<WorkSpace>([]);
 
+  const getMessageList = async () => {
+    let result = await supabaseWrapper.getMessage();
+
+    if (!result) return;
+    setMessageList(result);
+  };
+
+  const createMessageList = async (message: string) => {
+    await supabaseWrapper.createMessage(message);
+  };
+
   useEffect(() => {
-    getTodoList();
+    getMessageList();
   }, [messageList]);
 
-  async function getTodoList() {
-    const result = await supabaseWrapper.getMessage();
-    if (result) setMessageList(result);
-  }
-
-  async function createTodoList(message: string) {
-    await supabaseWrapper.createMessage(message);
-  }
-
-  return { messageList, createTodoList };
+  return { messageList, createMessageList };
 }
