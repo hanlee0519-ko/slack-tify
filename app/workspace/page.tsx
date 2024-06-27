@@ -1,8 +1,8 @@
 "use client";
 
+import useMessage from "./hooks/useMessage";
 import MessageList from "./components/MessageList";
 import MessageAddForm from "./components/MessageAddForm";
-import useMessage from "./hooks/useMessage";
 
 export default function Page() {
   const { messageList, createMessageList } = useMessage();

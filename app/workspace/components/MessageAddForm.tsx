@@ -9,7 +9,7 @@ type Props = {
 export default function MessageAddForm({ onCreate }: Props) {
   const [input, setInput] = useState<string | undefined>("");
 
-  function handleSubmit(event: FormEvent<HTMLFormElement>) {
+  const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
     if (typeof input === "undefined") return;
@@ -17,7 +17,7 @@ export default function MessageAddForm({ onCreate }: Props) {
 
     onCreate(input);
     setInput("");
-  }
+  };
 
   return (
     <form onSubmit={handleSubmit}>

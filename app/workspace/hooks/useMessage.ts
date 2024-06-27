@@ -7,14 +7,14 @@ export default function useMessage() {
   const [messageList, setMessageList] = useState<WorkSpace>([]);
 
   const getMessageList = async () => {
-    let result = await supabaseWrapper.getMessage();
+    let messages = await supabaseWrapper.getMessage();
 
-    if (!result) return;
-    setMessageList(result);
+    if (!messages) return;
+    setMessageList(messages);
   };
 
-  const createMessageList = async (message: string) => {
-    await supabaseWrapper.createMessage(message);
+  const createMessageList = async (messageText: string) => {
+    await supabaseWrapper.createMessage(messageText);
   };
 
   useEffect(() => {

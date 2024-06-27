@@ -7,15 +7,17 @@ export type MessageListType = {
   message: string;
 };
 
-const SUPABASE_API = createSupabaseBrowserClient();
+const SUPABASE_API_CLIENT = createSupabaseBrowserClient();
 
 async function getMessage(): Promise<MessageListType[] | null> {
-  const { data } = await SUPABASE_API.from("workspace").select("*");
+  const { data } = await SUPABASE_API_CLIENT.from("workspace").select("*");
   return data;
 }
 
 async function createMessage(message: string) {
-  await SUPABASE_API.from("workspace").insert({ message: message }).select();
+  await SUPABASE_API_CLIENT.from("workspace")
+    .insert({ message: message })
+    .select();
 }
 
 export const supabaseWrapper = { getMessage, createMessage };
