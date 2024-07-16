@@ -9,14 +9,18 @@ export type MessageListType = {
 
 const SUPABASE_API_CLIENT = createSupabaseBrowserClient();
 
-async function getMessage(): Promise<MessageListType[] | null> {
-  const { data } = await SUPABASE_API_CLIENT.from("workspace").select("*");
+async function getMessage(
+  channelName: string
+): Promise<MessageListType[] | null> {
+  const { data } = await SUPABASE_API_CLIENT.from("workspace")
+    .select("*")
+    .eq("channelName", channelName);
   return data;
 }
 
-async function createMessage(message: string) {
+async function createMessage(channelName: string, message: string) {
   await SUPABASE_API_CLIENT.from("workspace")
-    .insert({ message: message })
+    .insert([{ channelName: channelName, message: message }])
     .select();
 }
 

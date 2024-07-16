@@ -1,4 +1,4 @@
-import Link from "next/link";
+import ChannelList from "./components/ChannelList";
 
 type Props = {
   children: React.ReactNode;
@@ -8,7 +8,7 @@ export default function WorkspaceLayout({ children }: Props) {
   return (
     <>
       <nav>
-        <Link href="/">채널</Link>
+        <ChannelList />
       </nav>
       <section>{children}</section>
     </>
