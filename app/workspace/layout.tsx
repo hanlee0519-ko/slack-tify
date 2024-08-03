@@ -1,10 +1,11 @@
+import { supabaseWrapper } from "@/api/message";
 import ChannelList from "./components/ChannelList";
 
-type Props = {
+export default async function WorkspaceLayout({
+  children,
+}: Readonly<{
   children: React.ReactNode;
-};
-
-export default function WorkspaceLayout({ children }: Props) {
+}>) {
   return (
     <>
       <nav>

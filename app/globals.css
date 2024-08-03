@@ -1,0 +1,10 @@
+.nav-group {
+  background-color: salmon;
+  width: 50%;
+  a {
+    margin-left: 40px;
+    text-decoration: none;
+    color: white;
+    font-size: 20px;
+  }
+}
