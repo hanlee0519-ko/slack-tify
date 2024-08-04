@@ -15,11 +15,13 @@ export default function useMessage(channelName: string) {
 
   const createMessageList = async (messageText: string) => {
     await supabaseWrapper.createMessage(channelName, messageText);
+    await getMessageList(channelName);
   };
 
   useEffect(() => {
     getMessageList(channelName);
-  }, [messageList, channelName]);
+  }, [channelName]);
 
+  console.log("[useMessage]", messageList);
   return { messageList, createMessageList };
 }

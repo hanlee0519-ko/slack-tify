@@ -18,7 +18,7 @@ export default function ChannelList() {
 
   useEffect(() => {
     getChannelList();
-  }, [channelList]);
+  }, []);
 
   if (channelList === null) return;
 
