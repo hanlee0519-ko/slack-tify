@@ -9,7 +9,7 @@ export default function Page({ params }: { params: { slug: string } }) {
 
   return (
     <div>
-      <h1>this is {params.slug}</h1>
+      <h1>채널이름 : {decodeURIComponent(params.slug)}</h1>
       <MessageList messageList={messageList} />
       <MessageAddForm onCreate={createMessageList} />
     </div>

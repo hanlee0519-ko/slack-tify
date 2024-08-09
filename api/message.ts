@@ -7,11 +7,6 @@ export type MessageListType = {
   message: string;
 };
 
-export type ChannelListType = {
-  id: number;
-  name: string;
-};
-
 const SUPABASE_API_CLIENT = createSupabaseBrowserClient();
 
 async function getMessage(
@@ -29,10 +24,7 @@ async function createMessage(channelName: string, message: string) {
     .select();
 }
 
-async function getChannelList(): Promise<ChannelListType[] | null> {
-  let { data } = await SUPABASE_API_CLIENT.from("channelList").select("*");
-
-  return data;
-}
-
-export const supabaseWrapper = { getMessage, createMessage, getChannelList };
+export const messageWrapper = {
+  getMessage,
+  createMessage,
+};

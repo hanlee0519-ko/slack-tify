@@ -1,5 +1,10 @@
-import { supabaseWrapper } from "@/api/message";
-import ChannelList from "./components/ChannelList";
+import Channel from "./components/Channel";
+import {
+  workspaceContainer,
+  contentContainer,
+  nav,
+  main,
+} from "./style/workspace.css";
 
 export default async function WorkspaceLayout({
   children,
@@ -7,11 +12,13 @@ export default async function WorkspaceLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <>
-      <nav>
-        <ChannelList />
-      </nav>
-      <section>{children}</section>
-    </>
+    <div className={workspaceContainer}>
+      <div className={contentContainer}>
+        <nav className={nav}>
+          <Channel />
+        </nav>
+        <main className={main}>{children}</main>
+      </div>
+    </div>
   );
 }

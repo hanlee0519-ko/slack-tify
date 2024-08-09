@@ -1,6 +1,14 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
-import "./globals.css";
+import Link from "next/link";
+import {
+  appContainer,
+  globalContent,
+  globalNav,
+  globalItem,
+  globalTitle,
+  globalMain,
+} from "./global.css";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -16,7 +24,28 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={inter.className}>{children}</body>
+      <body className={inter.className}>
+        <div className={appContainer}>
+          <h1 className={globalTitle}>Slack-Tify</h1>
+          <div className={globalContent}>
+            <nav className={globalNav}>
+              <Link className={globalItem} href={"/"}>
+                Home
+              </Link>
+              <Link className={globalItem} href={"/workspace"}>
+                Channel
+              </Link>
+              <Link className={globalItem} href={"/dm"}>
+                DM
+              </Link>
+              <Link className={globalItem} href={"/login"}>
+                Login
+              </Link>
+            </nav>
+            <main className={globalMain}>{children}</main>
+          </div>
+        </div>
+      </body>
     </html>
   );
 }
